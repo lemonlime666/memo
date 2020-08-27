@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(250, 235, 215, 0.3);
+}
+
+.inputBox {
+    /* margin: 0 auto;border: 1px solid red; */
+    text-align: center;
+    height: 15vh;
+    line-height: 15vh;
+    padding-left: 200px;
+    position: relative;
+}
+
+#list {
+    border: 4px double #c0a57c;
+    width: 45%;
+    height: 84vh;
+    margin: 0 auto;
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: -30px;
+}
+
+#list li {
+    border-bottom: 1px solid #c0a57c;
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+    font-family: "Montserrat", sans-serif;
+    color: #383838;
+    cursor: pointer;
+    position: relative;
+}
+
+#list li:nth-of-type(even) {
+    background-color: rgba(255, 248, 220, 0.6);
+}
+
+#list li:hover {
+    color: brown;
+    transition: all 0.3s;
+    background-color: rgba(176, 196, 222, 0.219);
+}
+
+input {
+    font-family: "Montserrat", sans-serif;
+    border: 2px solid #383838;
+    border-radius: 5px;
+}
+
+#add,
+#re,
+#clear {
+    background-color: transparent;
+    outline: 0;
+    cursor: pointer;
+}
+
+#add {
+    padding: 5px 20px;
+    border: 2px solid maroon;
+    color: maroon;
+    border-radius: 5px;
+}
+#add:hover {
+    background-color: maroon;
+    color: #efefef;
+    transition: all 0.25s;
+}
+
+#re {
+    padding: 5px 13px;
+    border: 2px solid maroon;
+    color: maroon;
+    border-radius: 5px;
+}
+#re:hover {
+    background-color: maroon;
+    color: #efefef;
+    transition: all 0.25s;
+}
+
+#clear {
+    padding: 5px 20px;
+    border: 2px solid rgba(255, 217, 0, 0.4);
+    color: gold;
+    border-radius: 5px;
+}
+#clear:hover {
+    background-color: gold;
+    color: #fff;
+    transition: all 0.25s;
+}
+
+.reminder {
+    font-family: "Montserrat", sans-serif;
+    color: #afafaf;
+    position: absolute;
+    bottom: -20%;
+    left: 28%;
+    transform: translateX(0);
+    font-size: 14px;
+}

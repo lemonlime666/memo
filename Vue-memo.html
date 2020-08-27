@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue --combination</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <to-do-list></to-do-list>
+    </div>
+
+    <script>
+        Vue.component('to-do-input',{ //$emit上吐資料 step.1
+            data(){
+                return{
+                    task:'',
+                };
+            },
+            methods:{
+                submitData(){
+                    // this.$emit("事件",[...]);
+                    this.$emit('emitInfo', this.task);
+                    this.task='';
+                },
+            },
+            template: `
+                    <form @submit.prevent="submitData">
+                        <input type="text" v-model="task">
+                        <button>Submit</button>
+                    </form>
+            `,
+        });
+        
+
+        Vue.component('to-do-item',{ //props:[],接收上層傳遞資料 step.3 // 可以使用 v-bind 連結 props 做使用 //綁定事件後用函式 $emit 傳遞要執行的函式及資料給上層
+            props:['data','index'],
+            template: `
+                <li :data-num="index">{{data}}<a @click="remove" style="color:deeppink;cursor:pointer;"> --delete </a> </li>
+            `,
+            methods:{
+                remove(){
+                    this.$emit('removeItem',this.index);
+                }
+            }
+        });
+
+
+        Vue.component('to-do-list',{ //接收下層傳遞資料資料，在傳遞給另一個下層 step.2;   //可以利用v-bind傳遞資料給下層，下層使用props接收，再使用 v-bind 連結給 template 做使用 //接收到下層指令的函式及資料後，可以再指派給另一個屬於自己的函式去執行資料的異動或修改
+            data(){
+                return{
+                    tasks:[],
+                };
+            },
+            methods:{
+                addTask(task){
+                    this.tasks.push(task);
+                },
+                itemOut(index){
+                    this.tasks.splice(index,1);
+                }
+                
+            },
+            template: `
+                <div>
+                    <to-do-input @emitInfo="addTask"></to-do-input> <!--下層用$emit吐資料給上層 -->
+                    <ul>
+                        <to-do-item v-for="(task,index) in tasks" :data="task" :index="index" @removeItem='itemOut'></to-do-item>
+                    </ul>
+                </div>
+            `,
+        });
+
+
+        new Vue({el: "#app",}); 
+        
+    </script>
+</body>
+</html> 
